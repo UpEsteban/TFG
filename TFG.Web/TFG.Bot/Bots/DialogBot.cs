@@ -7,25 +7,29 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
 using TFG;
+using TFG.Bot.Resources.Messages;
+using TFG.Domain.Shared.Abstractions.Services;
 
 namespace Microsoft.BotBuilderSamples
 {
     public class DialogBot<T> : ActivityHandler where T : Dialog
     {
-        protected readonly BotState ConversationState;
-        protected readonly Dialog Dialog;
-        protected readonly BotState UserState;
+        protected readonly BotState conversationState;
+        protected readonly Dialog dialog;
+        protected readonly BotState userState;
 
-        protected readonly ILogger Logger;
-        protected readonly IBotServices BotServices;
+        protected readonly ILogger logger;
+        protected readonly IBotServices botServices;
+        protected readonly IMessagesService messagesService;
 
-        public DialogBot(ConversationState ConversationState, UserState UserState, T Dialog, ILogger<DialogBot<T>> Logger, IBotServices BotServices)
+        public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger, IBotServices botServices, IMessagesService messagesService)
         {
-            this.ConversationState = ConversationState;
-            this.UserState = UserState;
-            this.Dialog = Dialog;
-            this.Logger = Logger;
-            this.BotServices = BotServices;
+            this.conversationState = conversationState;
+            this.userState = userState;
+            this.dialog = dialog;
+            this.logger = logger;
+            this.botServices = botServices;
+            this.messagesService = messagesService;
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -33,29 +37,31 @@ namespace Microsoft.BotBuilderSamples
             await RecognizerResultAsync(turnContext, cancellationToken);
 
             // Run the Dialog with the new message Activity.
-            await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+            await dialog.RunAsync(turnContext, conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
+            var message = messagesService.Get(MessagesKey.Key.Welcome.ToString());
+
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to DiaBot "), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(message.Value), cancellationToken);
                 }
             }
         }
 
         private async Task RecognizerResultAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var ConversationStateAccessor = ConversationState.CreateProperty<ConversationData>(nameof(ConversationData));
-            var conversationState = await ConversationStateAccessor.GetAsync(turnContext, () => new ConversationData());
+            var ConversationStateAccessor = conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
+            var conversation = await ConversationStateAccessor.GetAsync(turnContext, () => new ConversationData());
 
             // First, we use the dispatch model to determine which cognitive service (LUIS or QnA) to use.
-            conversationState.RecognizerResult = await BotServices.Dispatch.RecognizeAsync(turnContext, cancellationToken);
+            conversation.RecognizerResult = await botServices.Dispatch.RecognizeAsync(turnContext, cancellationToken);
 
-            conversationState.LuisResult = conversationState.RecognizerResult.Properties["luisResult"] as LuisResult;
+            conversation.LuisResult = conversation.RecognizerResult.Properties["luisResult"] as LuisResult;
         }
     }
 }

@@ -29,6 +29,10 @@ namespace Microsoft.BotBuilderSamples
             services.AddSingleton<TFG.Domain.Shared.Abstractions.Repositories.IEdamamRepository, TFG.Infraestructure.ExternalApi.Edamam.EdamamRepository>();
             services.AddSingleton<TFG.Domain.Shared.Abstractions.Domains.IEdamamDomain, TFG.Domain.Domains.EdamamDomain>();
             services.AddSingleton<TFG.Domain.Shared.Abstractions.Services.IEdamamService, TFG.Domain.Services.EdamamService>();
+
+            services.AddSingleton<TFG.Domain.Shared.Abstractions.Repositories.IMessagesRepository, TFG.Infraestructure.Repository.MessagesRepository>();
+            services.AddSingleton<TFG.Domain.Shared.Abstractions.Domains.IMessagesDomain, TFG.Domain.Domains.MessagesDomain>();
+            services.AddSingleton<TFG.Domain.Shared.Abstractions.Services.IMessagesService, TFG.Domain.Services.MessagesService>();
         }
 
         private void ConfigureBot(IServiceCollection services)
@@ -57,6 +61,7 @@ namespace Microsoft.BotBuilderSamples
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new DTOEdamamMappers());
+                mc.AddProfile(new DTOMessagesMappers());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

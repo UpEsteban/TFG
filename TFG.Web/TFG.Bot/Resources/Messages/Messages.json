@@ -1,0 +1,12 @@
+﻿[
+  {
+    "Value": "Intent -> {0}",
+    "MessageId": "ResultIntent",
+    "Language": "es"
+  },
+  {
+    "Value": "Welcome to DiaBot",
+    "MessageId": "Welcome",
+    "Language": "es"
+  }
+]
