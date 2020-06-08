@@ -31,18 +31,9 @@
 *.out
 *.app
 
+
 *.pdb
 obj/**
 bin/**
 runtimes/**
 .appsettings.json
-/.vs
-/TFG.Domain/TFG.Domain/obj
-/TFG.Domain.Shared/TFG.Domain.Shared/bin/Debug/netcoreapp3.1
-/TFG.Domain.Shared/TFG.Domain.Shared/obj
-/TFG.Infraestructure/TFG.Infraestructure/obj
-/TFG.ServiceContracts/TFG.ServiceContracts/obj
-/TFG.Web/TFG.Bot/.vs
-/TFG.Web/TFG.Bot/bin/Debug/netcoreapp3.1
-/TFG.Web/TFG.Bot/bin/Release/netcoreapp3.1
-/TFG.Web/TFG.Bot/obj
