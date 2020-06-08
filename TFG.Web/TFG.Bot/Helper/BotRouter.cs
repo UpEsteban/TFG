@@ -1,6 +1,11 @@
-﻿using Microsoft.Bot.Builder;
+﻿using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Streaming;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
 using TFG.Domain.Shared.Abstractions.Services;
 
@@ -14,7 +19,16 @@ namespace TFG.Helper
 
             var conversationData = await _conversationStateAccessor.GetAsync(stepContext.Context, () => new ConversationData());
 
-            var lr = conversationData.LuisResult;
+            LuisResult lr = conversationData.LuisResult;
+
+            var subdialog = GetSubdialog(lr);
+
+            if (!string.IsNullOrEmpty(subdialog))
+            {
+                //return await stepContext.BeginDialogAsync(nameof(subdialog), CancellationToken.None);
+                await stepContext.Context.SendActivityAsync(string.Format(message.Value, subdialog));
+                return await stepContext.EndDialogAsync();
+            }
 
             switch (lr.TopScoringIntent.Intent)
             {
@@ -26,6 +40,13 @@ namespace TFG.Helper
             }
 
             return await stepContext.EndDialogAsync();
+        }
+
+        private static string GetSubdialog(LuisResult luisResult)
+        {
+            var entity = luisResult.Entities.Where(x => x.Entity.Equals(Luis.Subdialog_Login)).FirstOrDefault();
+
+            return (entity != null) ? entity.Entity + "Dialog" : string.Empty;
         }
     }
 }

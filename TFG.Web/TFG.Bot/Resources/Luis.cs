@@ -10,5 +10,7 @@
         public const string RecipeAllergy_Intent = "Recipe_Allergy";
         public const string RecipeSearch_Intent = "Recipe_Search";
         public const string None_Intent = "None";
+
+        public const string Subdialog_Login = "Login";
     }
 }
