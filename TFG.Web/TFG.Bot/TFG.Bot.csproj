@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime" Version="2.1.0" />
     <PackageReference Include="Microsoft.Bot.Builder" Version="4.9.3" />
@@ -12,6 +13,11 @@
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.9.3" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.9.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TFG.Domain\TFG.Domain\TFG.Domain.csproj" />
+    <ProjectReference Include="..\..\TFG.Infraestructure\TFG.Infraestructure\TFG.Infraestructure.csproj" />
   </ItemGroup>
 
 </Project>

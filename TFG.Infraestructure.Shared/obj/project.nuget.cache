@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nEoLyWQN9Vie5HViEKDCE/3yZandhmetspDIqYPtAMY+TZl7zCZ1EHitPHP1APUPPobQBB9tKD3FnA459H3JCg==",
+  "success": true,
+  "projectFilePath": "D:\\xample\\TFG.Infraestructure.Shared\\TFG.Infraestructure.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\esteb\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,6 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -8,6 +6,7 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TFG.Dialogs;
+using TFG.Domain.Helpers.Mappers;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -24,6 +23,12 @@ namespace Microsoft.BotBuilderSamples
             ConfigureBot(services);
 
             ConfigureStorage(services);
+
+            ConfigureMappers(services);
+
+            services.AddSingleton<TFG.Domain.Shared.Abstractions.Repositories.IEdamamRepository, TFG.Infraestructure.ExternalApi.Edamam.EdamamRepository>();
+            services.AddSingleton<TFG.Domain.Shared.Abstractions.Domains.IEdamamDomain, TFG.Domain.Domains.EdamamDomain>();
+            services.AddSingleton<TFG.Domain.Shared.Abstractions.Services.IEdamamService, TFG.Domain.Services.EdamamService>();
         }
 
         private void ConfigureBot(IServiceCollection services)
@@ -45,6 +50,17 @@ namespace Microsoft.BotBuilderSamples
             services.AddSingleton<UserState>();
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
+        }
+
+        private void ConfigureMappers(IServiceCollection services)
+        {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new DTOEdamamMappers());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
