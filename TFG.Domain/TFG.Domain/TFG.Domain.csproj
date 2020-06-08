@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domains\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Services\" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TFG.Domain.Shared\TFG.Domain.Shared\TFG.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\TFG.ServiceContracts\TFG.ServiceContracts\TFG.ServiceContracts.csproj" />
   </ItemGroup>
 
 </Project>
