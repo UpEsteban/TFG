@@ -5,6 +5,7 @@ using Microsoft.Bot.Streaming;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TFG.Bot.Helper;
 using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
 using TFG.Domain.Shared.Abstractions.Services;
@@ -44,9 +45,11 @@ namespace TFG.Helper
 
         private static string GetSubdialog(LuisResult luisResult)
         {
-            var entity = luisResult.Entities.Where(x => x.Entity.Equals(Luis.Subdialog_Login)).FirstOrDefault();
+            var entity = luisResult.Entities.Where(x => x.Type.Equals(Luis.SubDialogs)).FirstOrDefault();
 
-            return (entity != null) ? entity.Entity + "Dialog" : string.Empty;
+            var entityNormalizeName = LuisHelper.GetNormalizedValueFromEntity(entity);
+
+            return (entity != null) ? entityNormalizeName + "Dialog" : string.Empty;
         }
     }
 }
