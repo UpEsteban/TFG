@@ -5,8 +5,43 @@
     "Language": "es"
   },
   {
-    "Value": "Welcome to DiaBot",
+    "Value": "Bienvenido a DiaBot! Soy un chatbot diseñado para ayudarte con temas relacionados con la alergia.",
     "MessageId": "Welcome",
+    "Language": "es"
+  },
+  {
+    "Value": "Cancelando!",
+    "MessageId": "Cancel",
+    "Language": "es"
+  },
+  {
+    "Value": "Login",
+    "MessageId": "Login",
+    "Language": "es"
+  },
+  {
+    "Value": "Quiero buscar una receta",
+    "MessageId": "RecipeSearchCB",
+    "Language": "es"
+  },
+  {
+    "Value": "Buscar Receta",
+    "MessageId": "RecipeSearch",
+    "Language": "es"
+  },
+  {
+    "Value": "¿Que alergenos tiene la receta?",
+    "MessageId": "RecipeAllergySearchCB",
+    "Language": "es"
+  },
+  {
+    "Value": "Comprobar Alergenos",
+    "MessageId": "RecipeAllergySearch",
+    "Language": "es"
+  },
+  {
+    "Value": "Intenta generar un perfil para que me pueda ayudarte mejor o preguntame por una receta o por alguna alimento con el que tengas dudas elimenticias.",
+    "MessageId": "WelcomeExtend",
     "Language": "es"
   }
 ]

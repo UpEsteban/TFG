@@ -5,7 +5,14 @@
         public enum Key
         {
             ResultIntent,
-            Welcome
+            Welcome,
+            Cancel,
+            Login,
+            RecipeSearchCB,
+            RecipeSearch,
+            RecipeAllergySearchCB,
+            RecipeAllergySearch,
+            WelcomeExtend
         }
     }
 }
