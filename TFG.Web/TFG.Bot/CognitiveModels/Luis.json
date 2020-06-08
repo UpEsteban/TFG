@@ -1,0 +1,1000 @@
+﻿{
+  "luis_schema_version": "7.0.0",
+  "intents": [
+    {
+      "name": "None",
+      "features": []
+    },
+    {
+      "name": "Profile.AddAllergy",
+      "features": []
+    },
+    {
+      "name": "Profile.DeleteAllergy",
+      "features": []
+    },
+    {
+      "name": "Profile.DeleteUser",
+      "features": []
+    },
+    {
+      "name": "Profile.MyAllergies",
+      "features": []
+    },
+    {
+      "name": "Recipe.Allergy",
+      "features": []
+    },
+    {
+      "name": "Recipe.Search",
+      "features": []
+    },
+    {
+      "name": "Welcome",
+      "features": []
+    }
+  ],
+  "entities": [
+    {
+      "name": "FullRecipeName",
+      "children": [
+        {
+          "name": "Allergy",
+          "children": [],
+          "features": [
+            {
+              "modelName": "Allergy",
+              "isRequired": true
+            }
+          ]
+        },
+        {
+          "name": "RecipeName",
+          "children": [],
+          "features": [
+            {
+              "modelName": "RecipeName",
+              "isRequired": true
+            }
+          ]
+        },
+        {
+          "name": "Ingredient",
+          "children": [],
+          "features": [
+            {
+              "modelName": "Ingredient",
+              "isRequired": true
+            }
+          ]
+        }
+      ],
+      "roles": [],
+      "features": []
+    },
+    {
+      "name": "Ingredient",
+      "children": [],
+      "roles": [],
+      "features": []
+    },
+    {
+      "name": "RecipeName",
+      "children": [],
+      "roles": [],
+      "features": []
+    }
+  ],
+  "hierarchicals": [],
+  "composites": [],
+  "closedLists": [
+    {
+      "name": "Allergy",
+      "subLists": [
+        {
+          "canonicalForm": "Leche",
+          "list": [
+            "lactosa",
+            "leche"
+          ]
+        },
+        {
+          "canonicalForm": "Huevo",
+          "list": []
+        },
+        {
+          "canonicalForm": "Gluten",
+          "list": [
+            "trigo",
+            "cebada",
+            "centeno",
+            "celiaco",
+            "celiaca"
+          ]
+        },
+        {
+          "canonicalForm": "Frutos secos",
+          "list": [
+            "almendras",
+            "avellanas"
+          ]
+        },
+        {
+          "canonicalForm": "Cacahuete",
+          "list": []
+        },
+        {
+          "canonicalForm": "Soja",
+          "list": []
+        },
+        {
+          "canonicalForm": "Pescado",
+          "list": []
+        },
+        {
+          "canonicalForm": "CrustÃ¡ceos",
+          "list": [
+            "Crustaceos"
+          ]
+        }
+      ],
+      "roles": []
+    }
+  ],
+  "prebuiltEntities": [
+    {
+      "name": "datetimeV2",
+      "roles": []
+    }
+  ],
+  "utterances": [
+    {
+      "text": "Â¿a que soy alergico?",
+      "intent": "Profile.MyAllergies",
+      "entities": []
+    },
+    {
+      "text": "alergenos de la receta",
+      "intent": "Recipe.Allergy",
+      "entities": []
+    },
+    {
+      "text": "alergenos receta",
+      "intent": "Recipe.Allergy",
+      "entities": []
+    },
+    {
+      "text": "aÃ±ade a mis alergias el gluten",
+      "intent": "Profile.AddAllergy",
+      "entities": []
+    },
+    {
+      "text": "aÃ±adir alergias",
+      "intent": "Profile.AddAllergy",
+      "entities": []
+    },
+    {
+      "text": "borra mi usuario",
+      "intent": "Profile.DeleteUser",
+      "entities": []
+    },
+    {
+      "text": "borra mis datos",
+      "intent": "Profile.DeleteUser",
+      "entities": []
+    },
+    {
+      "text": "borra todos mis datos",
+      "intent": "Profile.DeleteUser",
+      "entities": []
+    },
+    {
+      "text": "buenas",
+      "intent": "Welcome",
+      "entities": []
+    },
+    {
+      "text": "buscame la receta macarrones con chorizo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 18,
+          "endPos": 39,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscame una receta con pollo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 23,
+          "endPos": 27,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscame una receta de pescado con tomate",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 22,
+          "endPos": 28,
+          "children": []
+        },
+        {
+          "entity": "Ingredient",
+          "startPos": 34,
+          "endPos": 39,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar espaguetis",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 7,
+          "endPos": 16,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar lasaÃ±a",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 7,
+          "endPos": 12,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar receta bocate de pino y salsa de fresas",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 45,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar receta fideos chinos fritos con pollo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 43,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar receta muslos de pollo con almendras",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 32,
+          "children": []
+        },
+        {
+          "entity": "FullRecipeName",
+          "startPos": 14,
+          "endPos": 42,
+          "children": [
+            {
+              "entity": "RecipeName",
+              "startPos": 14,
+              "endPos": 32,
+              "children": []
+            },
+            {
+              "entity": "Allergy",
+              "startPos": 34,
+              "endPos": 42,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "buscar receta pepinillos con carne asada",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 39,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar receta pollo con almendras",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 14,
+          "endPos": 22,
+          "children": []
+        },
+        {
+          "entity": "FullRecipeName",
+          "startPos": 14,
+          "endPos": 32,
+          "children": [
+            {
+              "entity": "Ingredient",
+              "startPos": 14,
+              "endPos": 22,
+              "children": []
+            },
+            {
+              "entity": "Allergy",
+              "startPos": 24,
+              "endPos": 32,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "buscar receta pollo con almendras de 30 minutos",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "FullRecipeName",
+          "startPos": 14,
+          "endPos": 46,
+          "children": [
+            {
+              "entity": "Allergy",
+              "startPos": 24,
+              "endPos": 32,
+              "children": []
+            },
+            {
+              "entity": "RecipeName",
+              "startPos": 34,
+              "endPos": 46,
+              "children": []
+            }
+          ]
+        },
+        {
+          "entity": "RecipeName",
+          "startPos": 34,
+          "endPos": 46,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar receta pollo con limon",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 28,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar receta pollo con limÃ³n y romero",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 37,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar receta pollo con salsa de almendras y arroz",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "FullRecipeName",
+          "startPos": 14,
+          "endPos": 49,
+          "children": [
+            {
+              "entity": "Allergy",
+              "startPos": 33,
+              "endPos": 41,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "buscar receta setas chinas con pasta",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 35,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "buscar una receta",
+      "intent": "Recipe.Search",
+      "entities": []
+    },
+    {
+      "text": "como puedo hacer lasaÃ±a",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 17,
+          "endPos": 22,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "como se cocina la lasaÃ±a",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 18,
+          "endPos": 23,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "como se hace la lasaÃ±a",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 16,
+          "endPos": 21,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "como se hace un perrito caliente",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 16,
+          "endPos": 31,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "como se hace una hamburguesa",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 17,
+          "endPos": 27,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "como se hacen canelones",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 22,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "como se hacen unos macarrones con chorizo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 40,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "cuales son mis alergias",
+      "intent": "Profile.MyAllergies",
+      "entities": []
+    },
+    {
+      "text": "dime mis alergenos",
+      "intent": "Profile.MyAllergies",
+      "entities": []
+    },
+    {
+      "text": "dime mis alergias",
+      "intent": "Profile.MyAllergies",
+      "entities": []
+    },
+    {
+      "text": "dime una receta para la merluza al horno",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 24,
+          "endPos": 39,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "el conejo al ajillo lleva gluten ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 18,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "el pollo al limon lleva frutos secos ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 16,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "el pollo asado contiene frutos secos",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 13,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "el pollo frito tiene frutos secos ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 13,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "hola",
+      "intent": "Welcome",
+      "entities": []
+    },
+    {
+      "text": "la ensalada cesar lleva pescado",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 16,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "la pasta con piÃ±a que alergenos lleva",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 16,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "la pasta contiene gluten ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 7,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "la pasta lleva gluten ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 3,
+          "endPos": 7,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "lista de alergias",
+      "intent": "Profile.MyAllergies",
+      "entities": []
+    },
+    {
+      "text": "los calamares rebozados tienen gluten ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 4,
+          "endPos": 22,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "mis alergenos",
+      "intent": "Profile.MyAllergies",
+      "entities": []
+    },
+    {
+      "text": "mis alergias",
+      "intent": "Profile.MyAllergies",
+      "entities": []
+    },
+    {
+      "text": "puedo comer espaguetis con albondigas ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 12,
+          "endPos": 36,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "puedo comer pollo frito ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 12,
+          "endPos": 22,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "que alergenos tiena la receta ?",
+      "intent": "Recipe.Allergy",
+      "entities": []
+    },
+    {
+      "text": "que alergenos tiene el pollo con miel y pimientos",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 23,
+          "endPos": 48,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "que alergenos tiene esta receta ?",
+      "intent": "Recipe.Allergy",
+      "entities": []
+    },
+    {
+      "text": "que puedo cocinar con perijil y pasta",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 22,
+          "endPos": 36,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "que puedo cocinar con salsa de tomate, pasta y pollo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 22,
+          "endPos": 51,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "que puedo hacer con ajos, tomate y pollo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 20,
+          "endPos": 39,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "que tipo de alergenos tiene el pollo al limon ?",
+      "intent": "Recipe.Allergy",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 31,
+          "endPos": 44,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "quiero buscar huevos rotos",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 25,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "quiero buscar pasta a la carbonara",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 33,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "quiero buscar patata cocida al horno",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 14,
+          "endPos": 35,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "quiero una receta con pepino pescado y arroz",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 22,
+          "endPos": 27,
+          "children": []
+        },
+        {
+          "entity": "Ingredient",
+          "startPos": 29,
+          "endPos": 35,
+          "children": []
+        },
+        {
+          "entity": "Ingredient",
+          "startPos": 39,
+          "endPos": 43,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "quiero una receta de conejo al ajillo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 21,
+          "endPos": 36,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "quita el pescado de mis alergias",
+      "intent": "Profile.DeleteAllergy",
+      "entities": []
+    },
+    {
+      "text": "quita el pescado y el gluten de mis alergenos",
+      "intent": "Profile.DeleteAllergy",
+      "entities": []
+    },
+    {
+      "text": "quitar alergias",
+      "intent": "Profile.DeleteAllergy",
+      "entities": []
+    },
+    {
+      "text": "receta con tomates pepino y pollo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 11,
+          "endPos": 32,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "receta de pollo con piÃ±a",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "RecipeName",
+          "startPos": 10,
+          "endPos": 23,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "recetas con aguacate y pollo",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 12,
+          "endPos": 27,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "recetas con conejo , pimiento y champiÃ±ones",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 12,
+          "endPos": 17,
+          "children": []
+        },
+        {
+          "entity": "Ingredient",
+          "startPos": 21,
+          "endPos": 28,
+          "children": []
+        },
+        {
+          "entity": "Ingredient",
+          "startPos": 32,
+          "endPos": 42,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "recetas con merluja y pimiento",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 12,
+          "endPos": 18,
+          "children": []
+        },
+        {
+          "entity": "Ingredient",
+          "startPos": 22,
+          "endPos": 29,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "soy alergido al trigo",
+      "intent": "Profile.AddAllergy",
+      "entities": []
+    },
+    {
+      "text": "tengo polloy patatas, que puedo hacer ?",
+      "intent": "Recipe.Search",
+      "entities": [
+        {
+          "entity": "Ingredient",
+          "startPos": 6,
+          "endPos": 19,
+          "children": []
+        }
+      ]
+    }
+  ],
+  "versionId": "0.2_upgraded",
+  "name": "IrkaBot",
+  "desc": "Tfg to Esteban Camilo Alzate",
+  "culture": "es-es",
+  "tokenizerVersion": "1.0.0",
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "phraselists": [],
+  "regex_features": [],
+  "patterns": [
+    {
+      "pattern": "recetas con {Ingredient}",
+      "intent": "Recipe.Search"
+    },
+    {
+      "pattern": "que puedo hacer con {Ingredient}",
+      "intent": "Recipe.Search"
+    },
+    {
+      "pattern": "dime una receta con {Ingredient}",
+      "intent": "Recipe.Search"
+    },
+    {
+      "pattern": "que puedo cocinar con {Ingredient}",
+      "intent": "Recipe.Search"
+    },
+    {
+      "pattern": "como se hacen {RecipeName}",
+      "intent": "Recipe.Search"
+    }
+  ],
+  "settings": []
+}
+
