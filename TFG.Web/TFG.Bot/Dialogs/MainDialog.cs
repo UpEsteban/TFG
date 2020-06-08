@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using TFG.Domain.Shared.Abstractions.Services;
 using TFG.Helper;
 
 namespace TFG.Dialogs
@@ -10,12 +11,16 @@ namespace TFG.Dialogs
     {
         private IStatePropertyAccessor<ConversationData> _conversationStateAccessor;
 
+        private readonly IMessagesService messagesService;
+
         // Dependency injection uses this constructor to instantiate MainDialog
-        public MainDialog(ConversationState conversationState, UserState userState)
+        public MainDialog(ConversationState conversationState, UserState userState, IMessagesService messagesService)
             : base(nameof(MainDialog))
         {
             // Get Conversation State Accessor
             _conversationStateAccessor = conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
+
+            this.messagesService = messagesService;
 
             AddDialog(new TextPrompt(nameof(TextPrompt)));
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
@@ -35,7 +40,7 @@ namespace TFG.Dialogs
         /// <returns></returns>
         private async Task<DialogTurnResult> InitialStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            return await BotRouter.Router(stepContext, _conversationStateAccessor);
+            return await BotRouter.Router(stepContext, _conversationStateAccessor, messagesService);
         }
     }
 }
