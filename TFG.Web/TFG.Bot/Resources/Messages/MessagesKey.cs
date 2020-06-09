@@ -19,6 +19,7 @@
             ConfirmationPin,
             AskAllergies,
             EndLogin,
+            Logged,
         }
     }
 }

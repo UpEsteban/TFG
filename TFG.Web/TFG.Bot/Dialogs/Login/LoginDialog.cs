@@ -45,6 +45,17 @@ namespace TFG.Bot.Dialogs.Login
 
         private async Task<DialogTurnResult> InitialStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            var conversationState = await conversationStateAccessor.GetAsync(stepContext.Context, () => new ConversationData());
+
+            if (conversationState.User != null)
+            {
+                var message = messagesService.Get(MessagesKey.Key.Logged.ToString()).Value;
+
+                await stepContext.Context.SendActivityAsync(message);
+
+                return await stepContext.EndDialogAsync();
+            }
+
             return await stepContext.NextAsync();
         }
 

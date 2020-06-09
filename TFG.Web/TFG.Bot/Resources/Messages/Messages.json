@@ -73,5 +73,10 @@
     "Value": "Ahora dime si tienes alguna alergia alimenticia.",
     "MessageId": "AskAllergies",
     "Language": "es"
+  },
+  {
+    "Value": "Ya has sido loggeado con el nick {0}.",
+    "MessageId": "Logged",
+    "Language": "es"
   }
 ]
