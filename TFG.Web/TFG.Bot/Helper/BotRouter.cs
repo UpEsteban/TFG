@@ -1,6 +1,11 @@
-﻿using Microsoft.Bot.Builder;
+﻿using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using System.Linq;
 using System.Threading.Tasks;
+using TFG.Bot.Dialogs.AddAllergy;
+using TFG.Bot.Helper;
+using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
 using TFG.Domain.Shared.Abstractions.Services;
 
@@ -14,18 +19,47 @@ namespace TFG.Helper
 
             var conversationData = await _conversationStateAccessor.GetAsync(stepContext.Context, () => new ConversationData());
 
-            var lr = conversationData.LuisResult;
+            LuisResult lr = conversationData.LuisResult;
+
+            var subdialog = GetSubdialog(lr);
+
+            if (!string.IsNullOrEmpty(subdialog))
+            {
+                return await stepContext.BeginDialogAsync(subdialog);
+            }
+
+            string nextDialog = string.Empty;
 
             switch (lr.TopScoringIntent.Intent)
             {
-                case "":
+                case Luis.ProfileAddAllergy_Intent:
+                    nextDialog = nameof(AddAllergyDialog);
                     break;
                 default:
                     await stepContext.Context.SendActivityAsync(string.Format(message.Value, lr.TopScoringIntent.Intent));
                     break;
             }
 
+            if (!string.IsNullOrEmpty(nextDialog))
+            {
+                return await stepContext.BeginDialogAsync(nextDialog);
+            }
+
             return await stepContext.EndDialogAsync();
+        }
+
+        private static string GetSubdialog(LuisResult luisResult)
+        {
+            var entity = luisResult.Entities.Where(x => x.Type.Equals(Luis.SubDialogs)).FirstOrDefault();
+
+            if (entity != null)
+            {
+                var entityNormalizeName = LuisHelper.GetNormalizedValueFromEntity(entity);
+
+                return entityNormalizeName + "Dialog";
+            }
+
+            return string.Empty;
         }
     }
 }
