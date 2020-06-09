@@ -12,7 +12,13 @@
             RecipeSearch,
             RecipeAllergySearchCB,
             RecipeAllergySearch,
-            WelcomeExtend
+            WelcomeExtend,
+            AskName,
+            ConfirmationName,
+            AskPin,
+            ConfirmationPin,
+            AskAllergies,
+            EndLogin,
         }
     }
 }

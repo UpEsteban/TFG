@@ -5,6 +5,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TFG.Bot.Dialogs.Login;
 using TFG.Dialogs;
 using TFG.Domain.Helpers.Mappers;
 
@@ -16,9 +17,6 @@ namespace Microsoft.BotBuilderSamples
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
-
-            // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             ConfigureBot(services);
 
@@ -37,13 +35,18 @@ namespace Microsoft.BotBuilderSamples
 
         private void ConfigureBot(IServiceCollection services)
         {
-            services.AddTransient<MainDialog>();
+            // Create the Bot Framework Adapter with error handling enabled.
+            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot services (LUIS, QnA) as a singleton.
             services.AddSingleton<IBotServices, BotServices>();
 
             // Create the bot as a transient.
             services.AddTransient<IBot, DialogBot<MainDialog>>();
+
+            services.AddScoped<MainDialog>();
+
+            services.AddScoped<LoginState>();
         }
 
         private void ConfigureStorage(IServiceCollection services)

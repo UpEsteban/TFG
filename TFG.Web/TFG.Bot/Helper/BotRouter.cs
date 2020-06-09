@@ -1,9 +1,7 @@
 ﻿using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Streaming;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using TFG.Bot.Helper;
 using TFG.Bot.Resources;
@@ -26,9 +24,7 @@ namespace TFG.Helper
 
             if (!string.IsNullOrEmpty(subdialog))
             {
-                //return await stepContext.BeginDialogAsync(nameof(subdialog), CancellationToken.None);
-                await stepContext.Context.SendActivityAsync(string.Format(message.Value, subdialog));
-                return await stepContext.EndDialogAsync();
+                return await stepContext.BeginDialogAsync(subdialog);
             }
 
             switch (lr.TopScoringIntent.Intent)
@@ -47,9 +43,14 @@ namespace TFG.Helper
         {
             var entity = luisResult.Entities.Where(x => x.Type.Equals(Luis.SubDialogs)).FirstOrDefault();
 
-            var entityNormalizeName = LuisHelper.GetNormalizedValueFromEntity(entity);
+            if (entity != null)
+            {
+                var entityNormalizeName = LuisHelper.GetNormalizedValueFromEntity(entity);
 
-            return (entity != null) ? entityNormalizeName + "Dialog" : string.Empty;
+                return entityNormalizeName + "Dialog";
+            }
+
+            return string.Empty;
         }
     }
 }

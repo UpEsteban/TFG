@@ -15,9 +15,9 @@ namespace Microsoft.BotBuilderSamples
 {
     public class DialogBot<T> : ActivityHandler where T : Dialog
     {
-        protected readonly BotState conversationState;
         protected readonly Dialog dialog;
         protected readonly BotState userState;
+        protected readonly BotState conversationState;
 
         protected readonly ILogger logger;
         protected readonly IBotServices botServices;
@@ -39,6 +39,15 @@ namespace Microsoft.BotBuilderSamples
 
             // Run the Dialog with the new message Activity.
             await dialog.RunAsync(turnContext, conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+        }
+
+        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await base.OnTurnAsync(turnContext, cancellationToken);
+
+            // Save any state changes that might have occured during the turn.
+            await conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+            await userState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)

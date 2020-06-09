@@ -43,5 +43,35 @@
     "Value": "Intenta generar un perfil para que me pueda ayudarte mejor o preguntame por una receta o por alguna alimento con el que tengas dudas elimenticias.",
     "MessageId": "WelcomeExtend",
     "Language": "es"
+  },
+  {
+    "Value": "Dime un nick para que pueda hablarte.",
+    "MessageId": "AskName",
+    "Language": "es"
+  },
+  {
+    "Value": "Perfecto el tu nick será {0}.",
+    "MessageId": "ConfirmationName",
+    "Language": "es"
+  },
+  {
+    "Value": "Dime un PIN para guardar tu sesion.",
+    "MessageId": "AskPin",
+    "Language": "es"
+  },
+  {
+    "Value": "Tu PIN ser {0}.",
+    "MessageId": "ConfirmationPin",
+    "Language": "es"
+  },
+  {
+    "Value": "Perfecto! Te has registrado en Diabot. Para agregar alergias solo tienes que decir \"Soy alergico al X \".",
+    "MessageId": "EndLogin",
+    "Language": "es"
+  },
+  {
+    "Value": "Ahora dime si tienes alguna alergia alimenticia.",
+    "MessageId": "AskAllergies",
+    "Language": "es"
   }
 ]
