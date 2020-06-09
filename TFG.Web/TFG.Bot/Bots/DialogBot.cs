@@ -37,6 +37,9 @@ namespace Microsoft.BotBuilderSamples
         {
             await RecognizerResultAsync(turnContext, cancellationToken);
 
+            // Set spanish language
+            turnContext.Activity.Locale = "es-ES";
+
             // Run the Dialog with the new message Activity.
             await dialog.RunAsync(turnContext, conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }

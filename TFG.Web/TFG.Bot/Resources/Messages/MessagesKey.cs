@@ -20,6 +20,10 @@
             AskAllergies,
             EndLogin,
             Logged,
+            AddAllergy_Inital,
+            AddAllergy_Added,
+            AddAllergy_More,
+            AddAllergy_End,
         }
     }
 }

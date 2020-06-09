@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Linq;
 using System.Threading.Tasks;
+using TFG.Bot.Dialogs.AddAllergy;
 using TFG.Bot.Helper;
 using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
@@ -27,13 +28,21 @@ namespace TFG.Helper
                 return await stepContext.BeginDialogAsync(subdialog);
             }
 
+            string nextDialog = string.Empty;
+
             switch (lr.TopScoringIntent.Intent)
             {
-                case "":
+                case Luis.ProfileAddAllergy_Intent:
+                    nextDialog = nameof(AddAllergyDialog);
                     break;
                 default:
                     await stepContext.Context.SendActivityAsync(string.Format(message.Value, lr.TopScoringIntent.Intent));
                     break;
+            }
+
+            if (!string.IsNullOrEmpty(nextDialog))
+            {
+                return await stepContext.BeginDialogAsync(nextDialog);
             }
 
             return await stepContext.EndDialogAsync();

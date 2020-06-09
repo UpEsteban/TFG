@@ -78,5 +78,25 @@
     "Value": "Ya has sido loggeado con el nick {0}.",
     "MessageId": "Logged",
     "Language": "es"
+  },
+  {
+    "Value": "Dinos que a que tienes alergia.",
+    "MessageId": "AddAllergy_Inital",
+    "Language": "es"
+  },
+  {
+    "Value": "Perfecto! Hemos añadido {0} a la lista de tus alergias.",
+    "MessageId": "AddAllergy_Added",
+    "Language": "es"
+  },
+  {
+    "Value": "¿Quieres añadir más alergias?",
+    "MessageId": "AddAllergy_More",
+    "Language": "es"
+  },
+  {
+    "Value": "Perfecto! Las alergias seleccionadas son: {0} . Recuerda que puedes eleminarlas diciendo \"Eliminar alergia X \".",
+    "MessageId": "AddAllergy_End",
+    "Language": "es"
   }
 ]

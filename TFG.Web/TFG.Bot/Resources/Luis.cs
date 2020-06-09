@@ -1,4 +1,7 @@
-﻿namespace TFG.Bot.Resources
+﻿using System.Collections.Generic;
+using System.Globalization;
+
+namespace TFG.Bot.Resources
 {
     public class Luis
     {
@@ -12,5 +15,9 @@
         public const string None_Intent = "None";
 
         public const string SubDialogs = "SubDialogs";
+        public const string AllergyEntity = "Allergy";
+
+
+        public static readonly List<string> ValidAllergies = new List<string> { "Cacahuete", "Crustáceos", "Frutos secos", "Gluten", "Huevo", "Leche", "Pescado", "Soja" };
     }
 }
