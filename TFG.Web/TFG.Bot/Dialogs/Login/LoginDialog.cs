@@ -51,7 +51,7 @@ namespace TFG.Bot.Dialogs.Login
             {
                 var message = messagesService.Get(MessagesKey.Key.Logged.ToString()).Value;
 
-                await stepContext.Context.SendActivityAsync(message);
+                await stepContext.Context.SendActivityAsync(string.Format(message, conversationState.User.Name));
 
                 return await stepContext.EndDialogAsync();
             }
