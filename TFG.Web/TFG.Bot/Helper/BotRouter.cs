@@ -4,6 +4,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using System.Linq;
 using System.Threading.Tasks;
 using TFG.Bot.Dialogs.AddAllergy;
+using TFG.Bot.Dialogs.DeleteAllergy;
 using TFG.Bot.Helper;
 using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
@@ -34,6 +35,9 @@ namespace TFG.Helper
             {
                 case Luis.ProfileAddAllergy_Intent:
                     nextDialog = nameof(AddAllergyDialog);
+                    break;
+                case Luis.ProfileDeleteAllergy_Intent:
+                    nextDialog = nameof(DeleteAllergyDialog);
                     break;
                 default:
                     await stepContext.Context.SendActivityAsync(string.Format(message.Value, lr.TopScoringIntent.Intent));

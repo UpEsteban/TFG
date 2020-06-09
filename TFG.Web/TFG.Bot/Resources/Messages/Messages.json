@@ -98,5 +98,30 @@
     "Value": "Perfecto! Las alergias seleccionadas son: {0} . Recuerda que puedes eleminarlas diciendo \"Eliminar alergia X \".",
     "MessageId": "AddAllergy_End",
     "Language": "es"
+  },
+  {
+    "Value": "Lo siento, no tienes alergias que eliminar.",
+    "MessageId": "RemoveAllergy_Error",
+    "Language": "es"
+  },
+  {
+    "Value": "Selecione el elemento a eliminar.",
+    "MessageId": "RemoveAllergy_Select",
+    "Language": "es"
+  },
+  {
+    "Value": "Se ha elimnado {0} de su lista.",
+    "MessageId": "RemoveAllergy_Removed",
+    "Language": "es"
+  },
+  {
+    "Value": "¿Quieres eliminar más alergias?",
+    "MessageId": "RemoveAllergy_More",
+    "Language": "es"
+  },
+  {
+    "Value": "Las alergias activas son {0}. Recuerde que puede añadir alergias diciento \" Añadir alergia X \"",
+    "MessageId": "RemoveAllergy_End",
+    "Language": "es"
   }
 ]

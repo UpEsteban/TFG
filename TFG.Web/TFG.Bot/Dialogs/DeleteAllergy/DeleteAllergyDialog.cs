@@ -10,25 +10,25 @@ using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
 using TFG.Domain.Shared.Abstractions.Services;
 
-namespace TFG.Bot.Dialogs.AddAllergy
+namespace TFG.Bot.Dialogs.DeleteAllergy
 {
-    public class AddAllergyDialog : BaseDialog
+    public class DeleteAllergyDialog : BaseDialog
     {
-        private const string AllergyPrompt = "AllergyPrompt";
+        private const string DeleteAllergyPrompt = "DeleteAllergyPrompt";
 
         private readonly IStatePropertyAccessor<ConversationData> conversationStateAccessor;
 
         private readonly IMessagesService messagesService;
 
-        public AddAllergyDialog(ConversationState conversationState, IMessagesService messagesService)
-            : base(nameof(AddAllergyDialog), conversationState, messagesService)
+        public DeleteAllergyDialog(ConversationState conversationState, IMessagesService messagesService)
+            : base(nameof(DeleteAllergyDialog), conversationState, messagesService)
         {
             // Get Conversation State Accessor
             conversationStateAccessor = conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
 
             this.messagesService = messagesService;
 
-            AddDialog(new ChoicePrompt(AllergyPrompt, AllergyValidator));
+            AddDialog(new ChoicePrompt(DeleteAllergyPrompt, AllergyValidator));
             AddDialog(new ConfirmPrompt(nameof(ConfirmPrompt)));
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
@@ -51,65 +51,69 @@ namespace TFG.Bot.Dialogs.AddAllergy
 
             if (conversation.User != null)
             {
-                conversation.User.Allergies = conversation.User.Allergies ?? new System.Collections.Generic.List<string>();
-            }
-            else
-            {
-                conversation.User = new ServiceContracts.Models.User { Allergies = new System.Collections.Generic.List<string>() };
-            }
-
-            if (allergiesEntities.Count() > 0)
-            {
-                var allergies = new List<string>();
-
-                foreach (var item in allergiesEntities)
+                if (allergiesEntities.Count() > 0)
                 {
-                    allergies.Add(LuisHelper.GetNormalizedValueFromEntity(item));
+                    var allergies = new List<string>();
+
+                    foreach (var item in allergiesEntities)
+                    {
+                        allergies.Add(LuisHelper.GetNormalizedValueFromEntity(item));
+                    }
+
+                    return await stepContext.NextAsync(allergies);
                 }
 
-                return await stepContext.NextAsync(allergies);
+                return await stepContext.NextAsync();
             }
 
-            return await stepContext.NextAsync();
+            var message = messagesService.Get(MessagesKey.Key.RemoveAllergy_Error.ToString()).Value;
+
+            await stepContext.Context.SendActivityAsync(message);
+
+            return await stepContext.EndDialogAsync();
         }
 
         private async Task<DialogTurnResult> SelectAllergiesStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var conversation = await conversationStateAccessor.GetAsync(stepContext.Context, () => new ConversationData());
 
+            var message = messagesService.Get(MessagesKey.Key.RemoveAllergy_Select.ToString()).Value;
+
+            if (conversation.User.Allergies.Count() <= 0)
+            {
+                var messageNotFound = messagesService.Get(MessagesKey.Key.RemoveAllergy_Error.ToString()).Value;
+
+                await stepContext.Context.SendActivityAsync(messageNotFound);
+
+                return await stepContext.EndDialogAsync();
+            }
+
             if (stepContext.Result != null && !stepContext.Result.ToString().Equals("Sí"))
             {
                 var allergies = (List<string>)stepContext.Result;
 
-                conversation.User.Allergies.AddRange(allergies);
+                allergies.ForEach(x => conversation.User.Allergies.Remove(x));
 
-                conversation.User.Allergies = conversation.User.Allergies.Distinct().ToList();
+                var removed = messagesService.Get(MessagesKey.Key.RemoveAllergy_Removed.ToString()).Value;
+
+                await stepContext.Context.SendActivityAsync(string.Format(removed, string.Join('-', allergies)));
 
                 return await stepContext.NextAsync();
-            }
-
-            var allAllergies = Luis.ValidAllergies;
-
-            var message = messagesService.Get(MessagesKey.Key.AddAllergy_Inital.ToString()).Value;
-
-            if (conversation.User.Allergies.Count() > 0)
-            {
-                conversation.User.Allergies.ForEach(x => allAllergies.Remove(x));
             }
 
             var options = new PromptOptions
             {
                 Prompt = MessageFactory.Text(message),
-                Choices = ChoiceFactory.ToChoices(allAllergies),
+                Choices = ChoiceFactory.ToChoices(conversation.User.Allergies),
                 Style = ListStyle.SuggestedAction
             };
 
-            return await stepContext.PromptAsync(AllergyPrompt, options, cancellationToken);
+            return await stepContext.PromptAsync(DeleteAllergyPrompt, options, cancellationToken);
         }
 
         private async Task<DialogTurnResult> MoreAllergiesStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            var message = messagesService.Get(MessagesKey.Key.AddAllergy_More.ToString()).Value;
+            var message = messagesService.Get(MessagesKey.Key.RemoveAllergy_More.ToString()).Value;
 
             var options = new PromptOptions
             {
@@ -129,14 +133,14 @@ namespace TFG.Bot.Dialogs.AddAllergy
 
             var conversation = await conversationStateAccessor.GetAsync(stepContext.Context, () => new ConversationData());
 
-            var message = messagesService.Get(MessagesKey.Key.AddAllergy_End.ToString()).Value;
+            var message = messagesService.Get(MessagesKey.Key.RemoveAllergy_End.ToString()).Value;
 
             await stepContext.Context.SendActivityAsync(string.Format(message, string.Join(',', conversation.User.Allergies)));
 
             return await stepContext.EndDialogAsync();
         }
 
-        #region Validators
+        #region Validator
         private async Task<bool> AllergyValidator(PromptValidatorContext<FoundChoice> promptContext, CancellationToken cancellationToken)
         {
             var conversation = await conversationStateAccessor.GetAsync(promptContext.Context, () => new ConversationData());
@@ -147,9 +151,9 @@ namespace TFG.Bot.Dialogs.AddAllergy
             {
                 var allergyName = LuisHelper.GetNormalizedValueFromEntity(allergy);
 
-                conversation.User.Allergies.Add(allergyName);
+                conversation.User.Allergies.Remove(allergyName);
 
-                var message = messagesService.Get(MessagesKey.Key.AddAllergy_Inital.ToString()).Value;
+                var message = messagesService.Get(MessagesKey.Key.RemoveAllergy_Removed.ToString()).Value;
 
                 await promptContext.Context.SendActivityAsync(string.Format(message, allergyName));
 
