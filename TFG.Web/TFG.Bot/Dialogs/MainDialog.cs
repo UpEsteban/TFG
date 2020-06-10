@@ -6,6 +6,7 @@ using TFG.Bot.Dialogs;
 using TFG.Bot.Dialogs.AddAllergy;
 using TFG.Bot.Dialogs.DeleteAllergy;
 using TFG.Bot.Dialogs.Login;
+using TFG.Bot.Dialogs.Profile;
 using TFG.Domain.Shared.Abstractions.Services;
 using TFG.Helper;
 
@@ -29,6 +30,7 @@ namespace TFG.Dialogs
             AddDialog(new LoginDialog(conversationState, loginState, messagesService));
             AddDialog(new AddAllergyDialog(conversationState, messagesService));
             AddDialog(new DeleteAllergyDialog(conversationState, messagesService));
+            AddDialog(new ProfileDialog(conversationState, messagesService));
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {

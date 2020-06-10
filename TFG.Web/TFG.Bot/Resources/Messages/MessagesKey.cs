@@ -30,6 +30,9 @@
             RemoveAllergy_More,
             RemoveAllergy_End,
             Profile,
+            Profile_initial,
+            Profile_allergies,
+            Profile_lastSearch,
         }
     }
 }

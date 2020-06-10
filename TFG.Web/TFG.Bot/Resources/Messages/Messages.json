@@ -128,5 +128,55 @@
     "Value": "Las alergias activas son {0}. Recuerde que puede añadir alergias diciento \" Añadir alergia X \"",
     "MessageId": "RemoveAllergy_End",
     "Language": "es"
+  },
+  {
+    "Value": "Aqui esta tu perfil, puedes ver tus alergias y tus ultimas busquedas.",
+    "MessageId": "Profile_initial",
+    "Language": "es"
+  },
+  {
+    "Value": "Estas son tus alergias: {0}",
+    "MessageId": "Profile_allergies",
+    "Language": "es"
+  },
+  {
+    "Value": "Estas son tus ultimas busquedas:",
+    "MessageId": "Profile_lastSearch",
+    "Language": "es"
+  },
+  {
+    "Value": "🥜",
+    "MessageId": "Cacahuete_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🦐",
+    "MessageId": "Crustaceos_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🥜",
+    "MessageId": "FrutosSecos_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🌾",
+    "MessageId": "Gluten_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🥚",
+    "MessageId": "Huevo_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🐄",
+    "MessageId": "Leche_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🐟",
+    "MessageId": "Pescado_Emoji",
+    "Language": "es"
   }
 ]
