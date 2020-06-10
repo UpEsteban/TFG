@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TFG.Bot.Dialogs.AddAllergy;
 using TFG.Bot.Dialogs.DeleteAllergy;
 using TFG.Bot.Dialogs.Profile;
+using TFG.Bot.Dialogs.SearchRecipe;
 using TFG.Bot.Helper;
 using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
@@ -42,6 +43,9 @@ namespace TFG.Helper
                     break;
                 case Luis.ProfileMyAllergies_Intent:
                     nextDialog = nameof(ProfileDialog);
+                    break;
+                case Luis.RecipeSearch_Intent:
+                    nextDialog = nameof(SearchRecipeDialog);
                     break;
                 default:
                     await stepContext.Context.SendActivityAsync(string.Format(message.Value, lr.TopScoringIntent.Intent));
