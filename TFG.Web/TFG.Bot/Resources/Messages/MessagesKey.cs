@@ -33,6 +33,7 @@
             Profile_initial,
             Profile_allergies,
             Profile_lastSearch,
+            Profile_notlogged,
         }
     }
 }

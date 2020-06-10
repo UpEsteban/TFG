@@ -10,46 +10,26 @@ namespace TFG.Bot.Cards
     {
         private static readonly string url = BlobStorage.baseUrl;
 
-        public static Activity WelcomeProfile(Activity activity, IMessagesService messagesService)
+        private static Attachment WelcomeProfile(IMessagesService messagesService)
         {
-            var reply = Welcome(activity, messagesService);
-
-            var attachments = new List<Attachment>();
-
             string profile = messagesService.Get(MessagesKey.Key.Profile.ToString()).Value;
 
             var Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, value: profile, title: profile) };
 
             var Images = new List<CardImage> { new CardImage { Alt = url + "welcome_login.jpg", Url = url + "welcome_login.jpg" } };
 
-            attachments.Add(GetHeroCard(profile, string.Empty, string.Empty, null, Buttons, Images));
-
-            attachments.AddRange(reply.Attachments);
-
-            reply.Attachments = attachments;
-
-            return reply;
+            return GetHeroCard(profile, string.Empty, string.Empty, null, Buttons, Images);
         }
 
-        public static Activity WelcomeLogin(Activity activity, IMessagesService messagesService)
+        public static Attachment WelcomeLogin(IMessagesService messagesService)
         {
-            var reply = Welcome(activity, messagesService);
-
-            var attachments = new List<Attachment>();
-
             string login = messagesService.Get(MessagesKey.Key.Login.ToString()).Value;
 
             var Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, value: login, title: login) };
 
             var Images = new List<CardImage> { new CardImage { Alt = url + "welcome_login.jpg", Url = url + "welcome_login.jpg" } };
 
-            attachments.Add(GetHeroCard(login, string.Empty, string.Empty, null, Buttons, Images));
-
-            attachments.AddRange(reply.Attachments);
-
-            reply.Attachments = attachments;
-
-            return reply;
+            return GetHeroCard(login, string.Empty, string.Empty, null, Buttons, Images);
         }
 
         public static Activity Welcome(Activity activity, IMessagesService messagesService)
@@ -57,6 +37,15 @@ namespace TFG.Bot.Cards
             var attachments = new List<Attachment>();
 
             var reply = activity.CreateReply();
+
+            if (activity.From.Properties.Count > 0)
+            {
+                attachments.Add(WelcomeProfile(messagesService));
+            }
+            else
+            {
+                attachments.Add(WelcomeLogin(messagesService));
+            }
 
             #region RecipeSearch
 

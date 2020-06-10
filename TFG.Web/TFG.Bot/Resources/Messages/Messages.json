@@ -1,5 +1,40 @@
 ﻿[
   {
+    "Value": "🥜",
+    "MessageId": "Cacahuete_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🦐",
+    "MessageId": "Crustaceos_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🥜",
+    "MessageId": "Frutos secos_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🌾",
+    "MessageId": "Gluten_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🥚",
+    "MessageId": "Huevo_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🐄",
+    "MessageId": "Leche_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🐟",
+    "MessageId": "Pescado_Emoji",
+    "Language": "es"
+  },
+  {
     "Value": "Intent -> {0}",
     "MessageId": "ResultIntent",
     "Language": "es"
@@ -130,7 +165,7 @@
     "Language": "es"
   },
   {
-    "Value": "Aqui esta tu perfil, puedes ver tus alergias y tus ultimas busquedas.",
+    "Value": "Hola {0}!! Aqui esta tu perfil, puedes ver tus alergias y tus ultimas busquedas.",
     "MessageId": "Profile_initial",
     "Language": "es"
   },
@@ -145,38 +180,8 @@
     "Language": "es"
   },
   {
-    "Value": "🥜",
-    "MessageId": "Cacahuete_Emoji",
-    "Language": "es"
-  },
-  {
-    "Value": "🦐",
-    "MessageId": "Crustaceos_Emoji",
-    "Language": "es"
-  },
-  {
-    "Value": "🥜",
-    "MessageId": "FrutosSecos_Emoji",
-    "Language": "es"
-  },
-  {
-    "Value": "🌾",
-    "MessageId": "Gluten_Emoji",
-    "Language": "es"
-  },
-  {
-    "Value": "🥚",
-    "MessageId": "Huevo_Emoji",
-    "Language": "es"
-  },
-  {
-    "Value": "🐄",
-    "MessageId": "Leche_Emoji",
-    "Language": "es"
-  },
-  {
-    "Value": "🐟",
-    "MessageId": "Pescado_Emoji",
+    "Value": "Lo siento para ver tu perfil primero debes generar uno.",
+    "MessageId": "Profile_notlogged",
     "Language": "es"
   }
 ]

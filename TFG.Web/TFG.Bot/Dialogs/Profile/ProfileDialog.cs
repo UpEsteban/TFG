@@ -1,16 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
-using AdaptiveCards.Rendering;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Schema;
-using TFG.Bot.Cards;
-using TFG.Bot.Helper;
-using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
 using TFG.Domain.Shared.Abstractions.Services;
 
@@ -44,7 +38,24 @@ namespace TFG.Bot.Dialogs.Profile
 
         private async Task<DialogTurnResult> InitialStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            return await stepContext.NextAsync();
+            var conversation = await conversationStateAccessor.GetAsync(stepContext.Context, () => new ConversationData());
+
+            if (conversation.User != null)
+            {
+                return await stepContext.NextAsync();
+            }
+
+            var reply = MessageFactory.Text(messagesService.Get(MessagesKey.Key.Profile_notlogged.ToString()).Value);
+
+            var login = messagesService.Get(MessagesKey.Key.Login.ToString()).Value;
+
+            var loginAction = new CardAction { Title = login, Value = login, Type = ActionTypes.ImBack };
+
+            reply.SuggestedActions = new SuggestedActions { Actions = new List<CardAction> { loginAction } };
+
+            await stepContext.Context.SendActivityAsync(reply);
+
+            return await stepContext.EndDialogAsync();
         }
 
         private async Task<DialogTurnResult> ProfileStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -53,11 +64,14 @@ namespace TFG.Bot.Dialogs.Profile
 
             var message = messagesService.Get(MessagesKey.Key.Profile_initial.ToString()).Value;
 
-            await stepContext.Context.SendActivityAsync(message);
+            await stepContext.Context.SendActivityAsync(string.Format(message, conversation.User.Name));
 
-            var messageAllergies = AllergyMessage(conversation.User.Allergies);
+            if (conversation.User.Allergies?.Count() > 0)
+            {
+                var messageAllergies = AllergyMessage(conversation.User.Allergies);
 
-            await stepContext.Context.SendActivityAsync(messageAllergies);
+                await stepContext.Context.SendActivityAsync(messageAllergies);
+            }
 
             var reply = MessageFactory.Text(messagesService.Get(MessagesKey.Key.Profile_lastSearch.ToString()).Value);
 
@@ -68,6 +82,7 @@ namespace TFG.Bot.Dialogs.Profile
             return await stepContext.EndDialogAsync();
         }
 
+        #region Helper
         private string AllergyMessage(List<string> allergies)
         {
             var message = messagesService.Get(MessagesKey.Key.Profile_allergies.ToString()).Value;
@@ -95,5 +110,6 @@ namespace TFG.Bot.Dialogs.Profile
 
             return new SuggestedActions { Actions = actions };
         }
+        #endregion
     }
 }

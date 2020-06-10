@@ -57,7 +57,7 @@ namespace TFG.Bot.Dialogs
                 switch (luisResult.TopScoringIntent.Intent)
                 {
                     case Luis.Welcome_Intent:
-                        await innerDc.Context.SendActivityAsync(HeroCards.WelcomeLogin(innerDc.Context.Activity, messagesService));
+                        await innerDc.Context.SendActivityAsync(HeroCards.Welcome(innerDc.Context.Activity, messagesService));
                         return await innerDc.CancelAllDialogsAsync();
                 }
             }
