@@ -4,6 +4,7 @@ using Microsoft.Bot.Schema;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TFG.Bot.Cards;
 using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
 using TFG.Domain.Shared.Abstractions.Services;
@@ -21,6 +22,15 @@ namespace TFG.Bot.Dialogs
         {
             conversationStateAccessor = conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
             this.messagesService = messagesService;
+        }
+
+        protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken)
+        {
+            var result = await InterruptAsync(innerDc, cancellationToken);
+            if (result != null)
+                return result;
+
+            return await base.OnContinueDialogAsync(innerDc, cancellationToken);
         }
 
         protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext innerDc, object options, CancellationToken cancellationToken = default(CancellationToken))
@@ -47,8 +57,7 @@ namespace TFG.Bot.Dialogs
                 switch (luisResult.TopScoringIntent.Intent)
                 {
                     case Luis.Welcome_Intent:
-                        // Cancell all dialogs.
-                        await innerDc.Context.SendActivityAsync(cancelMessage.Value, cancellationToken: cancellationToken);
+                        await innerDc.Context.SendActivityAsync(HeroCards.WelcomeLogin(innerDc.Context.Activity, messagesService));
                         return await innerDc.CancelAllDialogsAsync();
                 }
             }

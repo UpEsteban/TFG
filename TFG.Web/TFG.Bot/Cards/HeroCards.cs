@@ -10,29 +10,61 @@ namespace TFG.Bot.Cards
     {
         private static readonly string url = BlobStorage.baseUrl;
 
+        public static Activity WelcomeProfile(Activity activity, IMessagesService messagesService)
+        {
+            var reply = Welcome(activity, messagesService);
+
+            var attachments = new List<Attachment>();
+
+            string profile = messagesService.Get(MessagesKey.Key.Profile.ToString()).Value;
+
+            var Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, value: profile, title: profile) };
+
+            var Images = new List<CardImage> { new CardImage { Alt = url + "welcome_login.jpg", Url = url + "welcome_login.jpg" } };
+
+            attachments.Add(GetHeroCard(profile, string.Empty, string.Empty, null, Buttons, Images));
+
+            attachments.AddRange(reply.Attachments);
+
+            reply.Attachments = attachments;
+
+            return reply;
+        }
+
+        public static Activity WelcomeLogin(Activity activity, IMessagesService messagesService)
+        {
+            var reply = Welcome(activity, messagesService);
+
+            var attachments = new List<Attachment>();
+
+            string login = messagesService.Get(MessagesKey.Key.Login.ToString()).Value;
+
+            var Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, value: login, title: login) };
+
+            var Images = new List<CardImage> { new CardImage { Alt = url + "welcome_login.jpg", Url = url + "welcome_login.jpg" } };
+
+            attachments.Add(GetHeroCard(login, string.Empty, string.Empty, null, Buttons, Images));
+
+            attachments.AddRange(reply.Attachments);
+
+            reply.Attachments = attachments;
+
+            return reply;
+        }
+
         public static Activity Welcome(Activity activity, IMessagesService messagesService)
         {
             var attachments = new List<Attachment>();
 
             var reply = activity.CreateReply();
 
-            #region Login
-
-            string login = messagesService.Get(MessagesKey.Key.Login.ToString()).Value;
-
-            var Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, value: login, title: login) };
-            var Images = new List<CardImage> { new CardImage { Alt = url + "welcome_login.jpg", Url = url + "welcome_login.jpg" } };
-
-            attachments.Add(GetHeroCard(login, string.Empty, string.Empty, null, Buttons, Images));
-            #endregion
-
             #region RecipeSearch
 
             string recipeSearchCB = messagesService.Get(MessagesKey.Key.RecipeSearchCB.ToString()).Value;
             string recipeSearch = messagesService.Get(MessagesKey.Key.RecipeSearch.ToString()).Value;
 
-            Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, value: recipeSearchCB, title: recipeSearch) };
-            Images = new List<CardImage> { new CardImage { Alt = url + "welcome_recipe.jpg", Url = url + "welcome_recipe.jpg" } };
+            var Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, value: recipeSearchCB, title: recipeSearch) };
+            var Images = new List<CardImage> { new CardImage { Alt = url + "welcome_recipe.jpg", Url = url + "welcome_recipe.jpg" } };
 
             attachments.Add(GetHeroCard(recipeSearch, string.Empty, string.Empty, null, Buttons, Images));
             #endregion

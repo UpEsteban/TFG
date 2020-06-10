@@ -2,14 +2,16 @@
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using TFG.Bot.Dialogs;
 using TFG.Bot.Dialogs.AddAllergy;
+using TFG.Bot.Dialogs.DeleteAllergy;
 using TFG.Bot.Dialogs.Login;
 using TFG.Domain.Shared.Abstractions.Services;
 using TFG.Helper;
 
 namespace TFG.Dialogs
 {
-    public class MainDialog : ComponentDialog
+    public class MainDialog : BaseDialog
     {
         private IStatePropertyAccessor<ConversationData> _conversationStateAccessor;
 
@@ -17,7 +19,7 @@ namespace TFG.Dialogs
 
         // Dependency injection uses this constructor to instantiate MainDialog
         public MainDialog(ConversationState conversationState, UserState userState, LoginState loginState, IMessagesService messagesService)
-            : base(nameof(MainDialog))
+            : base(nameof(MainDialog), conversationState, messagesService)
         {
             // Get Conversation State Accessor
             _conversationStateAccessor = conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
@@ -26,6 +28,7 @@ namespace TFG.Dialogs
 
             AddDialog(new LoginDialog(conversationState, loginState, messagesService));
             AddDialog(new AddAllergyDialog(conversationState, messagesService));
+            AddDialog(new DeleteAllergyDialog(conversationState, messagesService));
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {

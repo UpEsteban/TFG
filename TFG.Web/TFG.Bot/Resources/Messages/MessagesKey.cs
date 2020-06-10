@@ -24,6 +24,12 @@
             AddAllergy_Added,
             AddAllergy_More,
             AddAllergy_End,
+            RemoveAllergy_Error,
+            RemoveAllergy_Select,
+            RemoveAllergy_Removed,
+            RemoveAllergy_More,
+            RemoveAllergy_End,
+            Profile,
         }
     }
 }
