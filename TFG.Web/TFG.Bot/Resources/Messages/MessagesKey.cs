@@ -34,6 +34,7 @@
             Profile_allergies,
             Profile_lastSearch,
             Profile_notlogged,
+            RecipeSearch_askname,
         }
     }
 }

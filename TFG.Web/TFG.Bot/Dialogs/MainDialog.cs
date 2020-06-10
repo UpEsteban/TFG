@@ -20,7 +20,7 @@ namespace TFG.Dialogs
         private readonly IMessagesService messagesService;
 
         // Dependency injection uses this constructor to instantiate MainDialog
-        public MainDialog(ConversationState conversationState, UserState userState, LoginState loginState, IMessagesService messagesService)
+        public MainDialog(ConversationState conversationState, UserState userState, LoginState loginState, IMessagesService messagesService, IEdamamService edamamService)
             : base(nameof(MainDialog), conversationState, messagesService)
         {
             // Get Conversation State Accessor
@@ -32,7 +32,7 @@ namespace TFG.Dialogs
             AddDialog(new AddAllergyDialog(conversationState, messagesService));
             AddDialog(new DeleteAllergyDialog(conversationState, messagesService));
             AddDialog(new ProfileDialog(conversationState, messagesService));
-            AddDialog(new SearchRecipeDialog(conversationState, messagesService));
+            AddDialog(new SearchRecipeDialog(conversationState, messagesService, edamamService));
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
