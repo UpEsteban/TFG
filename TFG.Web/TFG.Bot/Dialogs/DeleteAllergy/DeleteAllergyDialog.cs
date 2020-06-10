@@ -96,7 +96,7 @@ namespace TFG.Bot.Dialogs.DeleteAllergy
 
                 var removed = messagesService.Get(MessagesKey.Key.RemoveAllergy_Removed.ToString()).Value;
 
-                await stepContext.Context.SendActivityAsync(string.Format(removed, string.Join('-', allergies)));
+                await stepContext.Context.SendActivityAsync(string.Format(removed, string.Join(", ", allergies)));
 
                 return await stepContext.NextAsync();
             }

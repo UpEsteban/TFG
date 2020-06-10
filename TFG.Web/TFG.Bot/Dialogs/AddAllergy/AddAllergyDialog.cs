@@ -51,11 +51,11 @@ namespace TFG.Bot.Dialogs.AddAllergy
 
             if (conversation.User != null)
             {
-                conversation.User.Allergies = conversation.User.Allergies ?? new System.Collections.Generic.List<string>();
+                conversation.User.Allergies = conversation.User.Allergies ?? new List<string>();
             }
             else
             {
-                conversation.User = new ServiceContracts.Models.User { Allergies = new System.Collections.Generic.List<string>() };
+                conversation.User = new ServiceContracts.Models.User { Allergies = new List<string>() };
             }
 
             if (allergiesEntities.Count() > 0)
@@ -80,6 +80,10 @@ namespace TFG.Bot.Dialogs.AddAllergy
             if (stepContext.Result != null && !stepContext.Result.ToString().Equals("Sí"))
             {
                 var allergies = (List<string>)stepContext.Result;
+
+                var added = messagesService.Get(MessagesKey.Key.AddAllergy_Added.ToString()).Value;
+
+                await stepContext.Context.SendActivityAsync(string.Format(added, string.Join(", ", allergies)));
 
                 conversation.User.Allergies.AddRange(allergies);
 
@@ -149,7 +153,7 @@ namespace TFG.Bot.Dialogs.AddAllergy
 
                 conversation.User.Allergies.Add(allergyName);
 
-                var message = messagesService.Get(MessagesKey.Key.AddAllergy_Inital.ToString()).Value;
+                var message = messagesService.Get(MessagesKey.Key.AddAllergy_Added.ToString()).Value;
 
                 await promptContext.Context.SendActivityAsync(string.Format(message, allergyName));
 
