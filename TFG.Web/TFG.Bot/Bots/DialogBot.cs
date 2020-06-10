@@ -6,6 +6,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using TFG;
 using TFG.Bot.Cards;
 using TFG.Bot.Resources.Messages;
@@ -37,6 +38,8 @@ namespace Microsoft.BotBuilderSamples
         {
             await RecognizerResultAsync(turnContext, cancellationToken);
 
+            SetUserData(turnContext);
+
             // Set spanish language
             turnContext.Activity.Locale = "es-ES";
 
@@ -62,7 +65,7 @@ namespace Microsoft.BotBuilderSamples
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text(message.Value), cancellationToken);
-                    await turnContext.SendActivityAsync(HeroCards.WelcomeLogin((Activity)turnContext.Activity, messagesService));
+                    await turnContext.SendActivityAsync(HeroCards.Welcome((Activity)turnContext.Activity, messagesService));
                 }
             }
         }
@@ -76,6 +79,18 @@ namespace Microsoft.BotBuilderSamples
             conversation.RecognizerResult = await botServices.Dispatch.RecognizeAsync(turnContext, cancellationToken);
 
             conversation.LuisResult = conversation.RecognizerResult.Properties["luisResult"] as LuisResult;
+        }
+
+        private void SetUserData(ITurnContext<IMessageActivity> turnContext)
+        {
+            var conversationStateAccessor = conversationState.CreateProperty<ConversationData>(nameof(ConversationData));
+
+            var conversation = conversationStateAccessor.GetAsync(turnContext, () => new ConversationData()).Result;
+
+            if (conversation.User != null)
+            {
+                turnContext.Activity.From.Properties = JObject.FromObject(conversation.User);
+            }
         }
     }
 }

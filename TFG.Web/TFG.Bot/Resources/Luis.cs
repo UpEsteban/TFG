@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 
 namespace TFG.Bot.Resources
 {
@@ -17,7 +16,8 @@ namespace TFG.Bot.Resources
         public const string SubDialogs = "SubDialogs";
         public const string AllergyEntity = "Allergy";
 
+        public enum Allergies { Cacahuete, Crustaceos, FrutosSecos, Gluten, Huevo, Leche, Pescado };
 
-        public static readonly List<string> ValidAllergies = new List<string> { "Cacahuete", "Crustáceos", "Frutos secos", "Gluten", "Huevo", "Leche", "Pescado", "Soja" };
+        public static readonly List<string> ValidAllergies = new List<string> { "Cacahuete", "Crustáceos", "Frutos secos", "Gluten", "Huevo", "Leche", "Pescado" };
     }
 }

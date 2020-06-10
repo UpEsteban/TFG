@@ -1,5 +1,40 @@
 ﻿[
   {
+    "Value": "🥜",
+    "MessageId": "Cacahuete_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🦐",
+    "MessageId": "Crustaceos_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🥜",
+    "MessageId": "Frutos secos_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🌾",
+    "MessageId": "Gluten_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🥚",
+    "MessageId": "Huevo_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🐄",
+    "MessageId": "Leche_Emoji",
+    "Language": "es"
+  },
+  {
+    "Value": "🐟",
+    "MessageId": "Pescado_Emoji",
+    "Language": "es"
+  },
+  {
     "Value": "Intent -> {0}",
     "MessageId": "ResultIntent",
     "Language": "es"
@@ -127,6 +162,26 @@
   {
     "Value": "Las alergias activas son {0}. Recuerde que puede añadir alergias diciento \" Añadir alergia X \"",
     "MessageId": "RemoveAllergy_End",
+    "Language": "es"
+  },
+  {
+    "Value": "Hola {0}!! Aqui esta tu perfil, puedes ver tus alergias y tus ultimas busquedas.",
+    "MessageId": "Profile_initial",
+    "Language": "es"
+  },
+  {
+    "Value": "Estas son tus alergias: {0}",
+    "MessageId": "Profile_allergies",
+    "Language": "es"
+  },
+  {
+    "Value": "Estas son tus ultimas busquedas:",
+    "MessageId": "Profile_lastSearch",
+    "Language": "es"
+  },
+  {
+    "Value": "Lo siento para ver tu perfil primero debes generar uno.",
+    "MessageId": "Profile_notlogged",
     "Language": "es"
   }
 ]
