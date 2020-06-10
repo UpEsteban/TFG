@@ -29,6 +29,7 @@
             RemoveAllergy_Removed,
             RemoveAllergy_More,
             RemoveAllergy_End,
+            Profile,
         }
     }
 }

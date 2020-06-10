@@ -20,6 +20,11 @@
     "Language": "es"
   },
   {
+    "Value": "Perfil",
+    "MessageId": "Profile",
+    "Language": "es"
+  },
+  {
     "Value": "Quiero buscar una receta",
     "MessageId": "RecipeSearchCB",
     "Language": "es"

@@ -62,7 +62,7 @@ namespace Microsoft.BotBuilderSamples
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text(message.Value), cancellationToken);
-                    await turnContext.SendActivityAsync(HeroCards.Welcome((Activity)turnContext.Activity, messagesService));
+                    await turnContext.SendActivityAsync(HeroCards.WelcomeLogin((Activity)turnContext.Activity, messagesService));
                 }
             }
         }

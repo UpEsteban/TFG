@@ -1,0 +1,18 @@
+{
+    "name": "TFG",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "262689e7-3cdb-407b-b8d7-49f7c885c5d3",
+            "appPassword": "Co&GlLJ$g^*}9etb_008Uqjsgv4B",
+            "endpoint": "http://localhost:3978/api/messages",
+            "id": "ac256550-ab40-11ea-9773-73279bfa3d89",
+            "name": "http://localhost:3978/api/messages"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0",
+    "overrides": null,
+    "path": "D:\\xample\\TFG.bot"
+}
