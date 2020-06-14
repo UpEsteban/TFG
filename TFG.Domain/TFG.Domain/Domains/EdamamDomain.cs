@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using System.Collections.Generic;
+using System.Linq;
 using TFG.Domain.Shared.Abstractions.Domains;
 using TFG.Domain.Shared.Abstractions.Repositories;
 using TFG.Domain.Shared.Models;
@@ -17,11 +19,47 @@ namespace TFG.Domain.Domains
             this.mapper = mapper;
         }
 
-        public EdamamRecipe GetRecipeByName(string text)
+        public List<EdamamRecipe> GetRecipeByName(string text)
         {
-            var model = repository.GetRecipeByName(text);
+            var model = repository.GetRecipeByName(text).hits.Select(x => x.recipe).ToList();
 
-            return mapper.Map<EdamamRecipeDTO, EdamamRecipe>(model);
+            return Mappper(model);
+        }
+
+        private List<EdamamRecipe> Mappper(List<EdamamRecipeDTO.Recipe> model)
+        {
+            var result = new List<EdamamRecipe>();
+
+            foreach (var r in model)
+            {
+                var ingredientList = r.ingredients.ToList();
+
+                var ingredients = mapper.Map<List<EdamamRecipeDTO.Ingredient>, List<EdamamRecipe.Ingredient>>(ingredientList);
+
+                var disgestList = r.digest.ToList();
+
+                var digest = mapper.Map<List<EdamamRecipeDTO.Digest>, List<EdamamRecipe.Digest>>(disgestList);
+
+                result.Add(new EdamamRecipe
+                {
+                    uri = r.uri,
+                    label = r.label,
+                    image = r.image,
+                    source = r.source,
+                    url = r.url,
+                    shareAs = r.shareAs,
+                    yield = r.yield,
+                    dietLabels = r.dietLabels,
+                    healthLabels = r.healthLabels,
+                    cautions = r.cautions,
+                    ingredientLines = r.ingredientLines,
+                    ingredients = ingredients,
+                    calories = r.calories,
+                    totalWeight = r.totalWeight,
+                    digest = digest,
+                });
+            }
+            return result;
         }
     }
 }

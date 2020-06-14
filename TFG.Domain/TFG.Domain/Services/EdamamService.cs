@@ -1,4 +1,5 @@
-﻿using TFG.Domain.Shared.Abstractions.Domains;
+﻿using System.Collections.Generic;
+using TFG.Domain.Shared.Abstractions.Domains;
 using TFG.Domain.Shared.Abstractions.Services;
 using TFG.ServiceContracts.Models;
 
@@ -13,10 +14,9 @@ namespace TFG.Domain.Services
             this.domain = domain;
         }
 
-        public EdamamRecipe GetRecipeByName(string text)
+        public List<EdamamRecipe> GetRecipeByName(string text)
         {
-            var res = domain.GetRecipeByName(text);
-            return res;
+            return domain.GetRecipeByName(text);
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using TFG.ServiceContracts.Models;
+﻿using System.Collections.Generic;
+using TFG.ServiceContracts.Models;
 
 namespace TFG.Domain.Shared.Abstractions.Domains
 {
     public interface IEdamamDomain
     {
-        EdamamRecipe GetRecipeByName(string text);
+        List<EdamamRecipe> GetRecipeByName(string text);
     }
 }
