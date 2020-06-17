@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
+using Microsoft.Bot.Schema;
+using TFG.Bot.Cards;
 using TFG.Bot.Resources;
 using TFG.Bot.Resources.Messages;
 using TFG.Domain.Shared.Abstractions.Services;
@@ -74,6 +76,10 @@ namespace TFG.Bot.Dialogs.SearchRecipe
             var recipeState = await recipeStateStateAccessor.GetAsync(stepContext.Context, () => new SearchRecipeState());
 
             var recipe = edamamService.GetRecipeByName(recipeState.recipeName);
+
+            var reply = GetAdaptiveCard.Recipe(stepContext.Context.Activity, recipe, messagesService);
+
+            await stepContext.Context.SendActivityAsync(reply);
 
             return await stepContext.EndDialogAsync();
         }

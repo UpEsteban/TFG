@@ -188,5 +188,10 @@
     "Value": "Dime el nombre o los ingredientes de la receta que quieres que busque.",
     "MessageId": "RecipeSearch_askname",
     "Language": "es"
+  },
+  {
+    "Value": "Estas son las recetas que he encontrado:",
+    "MessageId": "RecipeSearch_result",
+    "Language": "es"
   }
 ]

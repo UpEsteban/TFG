@@ -11,6 +11,7 @@ namespace TFG.Domain.Domains
     public class EdamamDomain : IEdamamDomain
     {
         private readonly IEdamamRepository repository;
+
         private readonly IMapper mapper;
 
         public EdamamDomain(IEdamamRepository repository, IMapper mapper)
@@ -21,7 +22,7 @@ namespace TFG.Domain.Domains
 
         public List<EdamamRecipe> GetRecipeByName(string text)
         {
-            var model = repository.GetRecipeByName(text).hits.Select(x => x.recipe).ToList();
+            var model = repository.GetRecipeByName(text).hits.Select(x => x.recipe).Take(3).ToList();
 
             return Mappper(model);
         }
@@ -32,13 +33,9 @@ namespace TFG.Domain.Domains
 
             foreach (var r in model)
             {
-                var ingredientList = r.ingredients.ToList();
+                var ingredients = mapper.Map<List<EdamamRecipeDTO.Ingredient>, List<EdamamRecipe.Ingredient>>(r.ingredients.ToList());
 
-                var ingredients = mapper.Map<List<EdamamRecipeDTO.Ingredient>, List<EdamamRecipe.Ingredient>>(ingredientList);
-
-                var disgestList = r.digest.ToList();
-
-                var digest = mapper.Map<List<EdamamRecipeDTO.Digest>, List<EdamamRecipe.Digest>>(disgestList);
+                var digest = mapper.Map<List<EdamamRecipeDTO.Digest>, List<EdamamRecipe.Digest>>(r.digest.ToList());
 
                 result.Add(new EdamamRecipe
                 {
