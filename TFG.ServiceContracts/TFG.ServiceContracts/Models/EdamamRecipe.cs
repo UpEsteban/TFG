@@ -1,49 +1,31 @@
-﻿namespace TFG.ServiceContracts.Models
+﻿using System.Collections.Generic;
+
+namespace TFG.ServiceContracts.Models
 {
     public class EdamamRecipe
     {
-        public string Q { get; set; }
-        public int From { get; set; }
-        public int To { get; set; }
-        public Params _params { get; set; }
-        public bool More { get; set; }
-        public int count { get; set; }
-        public Hit[] hits { get; set; }
+        public string uri { get; set; }
+        public string label { get; set; }
+        public string image { get; set; }
+        public string source { get; set; }
+        public string url { get; set; }
+        public string shareAs { get; set; }
+        public string yield { get; set; }
+        public string[] dietLabels { get; set; }
+        public string[] healthLabels { get; set; }
+        public object[] cautions { get; set; }
+        public string[] ingredientLines { get; set; }
+        public List<Ingredient> ingredients { get; set; }
+        public List<Nutrient> totalNutrients { get; set; }
+        public float calories { get; set; }
+        public float totalWeight { get; set; }
+        public List<Digest> digest { get; set; }
 
-        public class Params
+        public class Nutrient
         {
-            public object[] sane { get; set; }
-            public string[] q { get; set; }
-            public string[] app_id { get; set; }
-            public string[] app_key { get; set; }
-        }
-
-        public class Hit
-        {
-            public Recipe recipe { get; set; }
-            public bool bookmarked { get; set; }
-            public bool bought { get; set; }
-        }
-
-        public class Recipe
-        {
-            public string uri { get; set; }
             public string label { get; set; }
-            public string image { get; set; }
-            public string source { get; set; }
-            public string url { get; set; }
-            public string shareAs { get; set; }
-            public string yield { get; set; }
-            public string[] dietLabels { get; set; }
-            public string[] healthLabels { get; set; }
-            public object[] cautions { get; set; }
-            public string[] ingredientLines { get; set; }
-            public Ingredient[] ingredients { get; set; }
-            public float calories { get; set; }
-            public float totalWeight { get; set; }
-            public Totalnutrients totalNutrients { get; set; }
-            public Totaldaily totalDaily { get; set; }
-            public Digest[] digest { get; set; }
+            public float quantity { get; set; }
+            public string unit { get; set; }
         }
 
         public class Totalnutrients

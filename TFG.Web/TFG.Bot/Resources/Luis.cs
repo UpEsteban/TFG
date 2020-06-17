@@ -15,6 +15,7 @@ namespace TFG.Bot.Resources
 
         public const string SubDialogs = "SubDialogs";
         public const string AllergyEntity = "Allergy";
+        public const string RecipeNameEntity = "RecipeName";
 
         public enum Allergies { Cacahuete, Crustaceos, FrutosSecos, Gluten, Huevo, Leche, Pescado };
 

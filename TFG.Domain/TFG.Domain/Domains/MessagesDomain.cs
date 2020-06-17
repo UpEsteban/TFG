@@ -22,6 +22,11 @@ namespace TFG.Domain.Domains
         {
             var res = repository.Get(messageId);
 
+            if (res == null)
+            {
+                res = new MessageDTO();
+            }
+
             return mapper.Map<MessageDTO, Message>(res);
         }
     }
